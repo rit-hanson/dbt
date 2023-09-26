@@ -4,7 +4,7 @@ TL_history AS (
     SELECT
         DISTINCT PAX_CD
     FROM TRGPAX tp
-    WHERE TLDR_FG = 1
+    WHERE TLDR_FG = TRUE
     GROUP BY PAX_CD
 ),
 Attending_times AS (
@@ -19,7 +19,7 @@ Passengers AS (
             WHEN COUNT(DISTINCT TRGPAX.ACCT_NO)=1 THEN 'Y'
             WHEN COUNT(CASE WHEN at.times <=5 then 1 END)*100.0/COUNT(*)<=10 THEN 'Y'
             ELSE 'N' END AS SPECIAL,
-        CASE WHEN MAX(TRGPAX.JOIN_TP) <> 3 THEN 'Y' ELSE 'N' END AS JOIN_TP_CONFIRM,
+        CASE WHEN MAX(TRGPAX.JOIN_TP) <> '3' THEN 'Y' ELSE 'N' END AS JOIN_TP_CONFIRM,
         COUNT(*) AS PEOPLE,
         COUNT(CASE WHEN at.times <=5 then 1 END)*100.0/COUNT(*) AS PERC
 
@@ -48,7 +48,7 @@ final as (
 
     FROM TRGRUP --僅有當JOIN_TP_CONFIRM = Y AND SPECIAL = Y 才算特報
     LEFT JOIN Passengers p on  p.GRUP_CD = TRGRUP.GRUP_CD
-    WHERE TRGRUP.TKT_FG <> '1'  AND  CONVERT(DATE,TRGRUP.LEAV_DT) BETWEEN '{{var("train_start")}}' AND '{{var("train_end")}}'
+    WHERE TRGRUP.TKT_FG <> '1'  AND TRGRUP.LEAV_DT BETWEEN '{{var("train_start")}}' AND '{{var("train_end")}}'
 )
 
 select * from final
