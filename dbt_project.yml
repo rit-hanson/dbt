@@ -1,0 +1,31 @@
+name: 'dbt_richmond'
+version: '1.0.0'
+config-version: 2
+
+# This setting configures which "profile" dbt uses for this project.
+profile: 'dbt_richmond'
+
+# These configurations specify where dbt should look for different types of files.
+# The `model-paths` config, for example, states that models in this project can be
+# found in the "models/" directory. You probably won't need to change these!
+model-paths: ["models"]
+analysis-paths: ["analyses"]
+test-paths: ["tests"]
+seed-paths: ["seeds"]
+macro-paths: ["macros"]
+snapshot-paths: ["snapshots"]
+
+target-path: "target"  
+clean-targets:         
+  - "target"
+  - "dbt_packages"
+
+models:
+  dbt_richmond:
+    marts:
+      aigo:
+        +materialized: view
+
+vars:
+  train_start: '2022-11-01'
+  train_end: '2023-08-16'
