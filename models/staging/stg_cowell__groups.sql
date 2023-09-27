@@ -36,7 +36,6 @@ Groups AS (
 		) AS g on g.GRUP_CD = TRGRUP.GRUP_CD
 
 		WHERE TRGRUP.LEAV_DT BETWEEN '{{var("train_start")}}' AND '{{var("train_end")}}'
-		AND TRGRUP.SUB_CD = 'GO'
 		AND TRGRUP.GRUP_TP <> '1'
 )
 
