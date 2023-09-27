@@ -1,0 +1,6 @@
+version: 2
+
+models:
+  - name: pax_train
+    description: Fetch the training data for aigo
+  

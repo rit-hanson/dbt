@@ -1,3 +1,4 @@
+
 With ordered_seats AS (
 
 	SELECT * FROM {{ ref('stg_cowell__seats')}}
