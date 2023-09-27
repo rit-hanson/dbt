@@ -24,7 +24,7 @@ models:
   dbt_richmond:
     marts:
       aigo:
-        +materialized: view
+        +materialized: table
 
 vars:
   train_start: '2022-11-01'
